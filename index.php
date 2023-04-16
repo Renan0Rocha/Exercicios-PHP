@@ -13,6 +13,9 @@
 
 include_once "helpers.php";
 
+session_start();
+session_destroy();
+
 //1. Escreva uma função que calcule a média de um array de números.
 echo "A média dos números é: <b>". calcularMedia([2, 7, 6, 5]). "</b>";
 

@@ -13,12 +13,25 @@
 
 <body>
     <?php include_once "helpers.php"; ?>
-
+    <a href="index.php">Voltar para a página inicial</a>
     <?php
     session_start(); // Inicia a sessão
 
+    // Verifica se o nome do jogador já foi definido na sessão
     if (!isset($_SESSION['nome_jogador'])) {
-        $_SESSION['nome_jogador'] = "<script>obterNome()</script>";
+        // Se o nome do jogador não estiver definido, solicita o nome e o define na sessão
+        if (isset($_POST['nome_jogador'])) {
+            $_SESSION['nome_jogador'] = $_POST['nome_jogador'];
+        } else {
+    ?>
+            <form method="POST" id="formNomeJogador">
+                <label for="nome_jogador">Digite seu nome:</label>
+                <input type="text" id="nome_jogador" name="nome_jogador" required>
+                <input type="submit" class="button" id="btnNomeJogador" name="btnNomeJogador" value="Iniciar Jogo">
+            </form>
+    <?php
+            exit; // Encerra a execução do script até que o nome do jogador seja definido
+        }
     }
 
     // Verifica se o contador já foi definido na sessão
